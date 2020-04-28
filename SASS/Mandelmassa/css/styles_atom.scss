@@ -1,0 +1,136 @@
+@import "reset.css";
+@import "fonts.css";
+$colDarkred: #925227;
+$colBase: #444;
+$colLight: #d5d5d5;
+@mixin textStyle($fs, $fw, $fc) {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: $fs;
+    font-weight: $fw;
+    color: $fc;
+}
+
+html {
+    background-color: white;
+}
+
+body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    min-width: 590px;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: $colLight;
+}
+
+header {
+    grid-column: 1/-1;
+    h1 {
+        @include textStyle(4em, 200, $colDarkred);
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+}
+
+nav {
+    h2 {@include textStyle(1.5em, bold, $colDarkred);
+      margin-bottom: 5px;
+      cursor: pointer;
+      img {
+        transform: rotate(90deg);
+      }
+    }
+    ul {
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 200ms;
+    }
+    li {
+        margin-bottom: 1px;
+        background-color: rgba($colDarkred, 0.5);
+        &:hover,
+        &:focus,
+        &:active {
+            background-color: $colDarkred;
+        }
+        a {
+            @include textStyle(1em, 400, $colLight);
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+            transition: all 200ms;
+            &:hover,
+            &:focus {
+                margin-left: 5px;
+                transform: scale(1.05);
+                transform-origin: left;
+                // text-decoration: underline;
+            }
+        }
+    }
+}
+.navShow {
+  transform: scaleY(1);
+  transition: transform 200ms;
+}
+.navTwist {
+  transform: rotate(0);
+  transition: transform 500ms;
+}
+.navButton{
+  width: 18px;
+  transition: transform 200ms;
+  stroke: $colDarkred;
+}
+
+article {
+    color: $colBase;
+    grid-column: 2/-1;
+    img {
+        width: 100%;
+    }
+    h2 {
+        @include textStyle(1.5em, bold, $colDarkred);
+        margin: 10px 0px 5px 0px;
+    }
+    p,q {
+        @include textStyle(1em, regular, $colBase);
+        font-family: 'Source Serif Pro', serif;
+        line-height: 1.6em;
+        text-indent: 1em;
+    }
+    h2+p,
+    blockquote+p {
+        text-indent: 0;
+    }
+    blockquote {
+        font-family: 'Source Serif Pro', serif;
+        font-size: 2em;
+        line-height: 1.2em;
+        text-align: center;
+        color: darken($colLight, 50);
+        margin: 20px 0px;
+        &::before {
+            content: '\201D';
+            font-size: 2em;
+            color: $colDarkred;
+            vertical-align: -10 px;
+        }
+    }
+    h3 {
+      @include textStyle(1.1em, bold, $colBase);
+      margin: 8px 0px 3px 0px;
+    }
+    ul {
+        list-style: disc;
+        list-style-position: inside;
+        margin-top: 5px;
+        li {
+            @include textStyle(0.9em, 400, $colBase);
+            line-height: 1.2em;
+            margin-bottom: 3px;
+        }
+    }
+}
